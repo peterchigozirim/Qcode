@@ -8,7 +8,7 @@ import Footer from './components/Utility/Footer.vue';
 </script>
 
 <template>
-  <div class="bg-emerald-100/90 min-h-screen select-none">
+  <div class="bg-emerald-100/90 min-h-screen ">
       <!-- <header>
 
       <div class="wrapper">

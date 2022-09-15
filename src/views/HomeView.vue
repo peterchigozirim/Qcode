@@ -7,7 +7,7 @@ import QrContent from '../components/QrCodeComponents/QrContent.vue';
 <template>
   <main>
     <!-- <TheWelcome /> -->
-    <div class="max-w-6xl mx-auto w-11/12 min-h-[35rem] mt-20 md:mt-0 mb-5 flex md:items-center md:w-auto">
+    <div class="max-w-6xl mx-auto w-11/12 min-h-[35rem] mt-20 md:mt-10 mb-5 flex md:items-center md:w-auto">
       <QrCode class="" />
     </div>
 

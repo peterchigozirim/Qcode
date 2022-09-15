@@ -7,14 +7,24 @@
                     <div class="md:w-96 mx-auto">
                         <qr-content />
                         <form @submit.prevent="genQrCode()">
-                            <div class="space-y-3 mb-6">
+                            <div class=" mb-6">
                                 <div class="flex bg-emerald-600/90 divide-x-2 divide-white  drop-shadow-lg h-12 rounded overflow-hidden items-center pl-2">
                                     <div class="px-1" >
                                         <font-awesome :icon="['fas', 'globe']" class="text-white mr-2" />
                                     </div>
                                     <div class="w-full h-full">
-                                        <input type="text" v-model="url" placeholder="Enter your URL" class="w-full h-full bg-white focus:ring-0 focus:outline-none border-0 px-2 placeholder:text-emerald-900 text-emerald-900">
+                                        <input type="url" v-model="url" placeholder="Enter your URL" required class="w-full h-full bg-white focus:ring-0 focus:outline-none border-0 px-2 placeholder:text-emerald-900 text-emerald-900">
+                                        
                                     </div>
+                                </div>
+                                <div class="mt-1 text-xs">
+                                    <p>
+                                        example
+                                        <span class=" text-emerald-700 text-center font-bold italic">
+                                            ( https://gorgor.com )
+                                        </span>
+                                    </p>
+                                    
                                 </div>
                             </div>
                             <div class="space-y-3 mb-6">
@@ -44,13 +54,16 @@
             </div>
             <left-image-banner />
         </div>
-        <div class="w-full py-6">
-            <div class="">
-                <qrcode-vue :value="value" class="mx-auto " :background="'transparent'" :size="size" level="H" />
+        <div class="w-full space-y-4 py-6" v-show="qrShow">
+            <div class="" id="qrSvg">
+                <qrcode-vue :value="value" class="mx-auto " id="qrCode"   :size="size" level="H" />
+            </div>
+            <div id="qrLink" class="w-full">
+
             </div>
         </div>
 
-        <div class="w-full h-full max-h-screen fixed top-0 left-0 bg-emerald-700/50 backdrop-blur scroll-m-0 flex items-center justify-center">
+        <div v-show="loader" class="w-full h-full fixed top-0 left-0 bg-emerald-700/50 backdrop-blur scroll-m-0 flex items-center justify-center">
             <img src="/image/loader.svg" class="blur-none" alt="">
         </div>
     </div>
@@ -64,11 +77,14 @@ import LeftImageBanner from './LeftImageBanner.vue'
 export default {
     data() {
     return {
-        value: 'https://gorgor.com',
+        value: '',
         size: 200,
         loader: false,
         url:'',
         qrSize: '',
+        loader: false,
+        qrShow:false,
+        linkClass: 'w-96 h-10 mx-auto flex items-center justify-center font-bold bg-emerald-600/90 text-white'
     }
     },
     components: {
@@ -78,8 +94,41 @@ export default {
 },
     methods:{
         genQrCode(){
+            this.removeUrl()
+            this.loader = true
+            setTimeout(() => {
+                this.loader = false
+                this.qrShow = true
+            }, 1000);
             this.value = this.url
             this.size = this.qrSize
+
+            setTimeout(() => {
+                const qrSvg = document.getElementById('qrSvg');
+                const getUrl = qrSvg.querySelector('canvas');
+                
+                var img  = getUrl.toDataURL("image/png");
+                this.getSvg(img)
+            }, 50);
+
+
+        },
+
+        getSvg(url){
+            const link = document.createElement('a');
+            link.id = 'save-link';
+            link.classList = this.linkClass;
+            link.href = url;
+            link.download = 'qrcode';
+            link.innerHTML = 'Save Image';
+            document.getElementById('qrLink').appendChild(link)
+        },
+
+        removeUrl(){
+            const url = document.getElementById('save-link')
+            if (url) {
+                url.remove();
+            }
         }
     },
 }
