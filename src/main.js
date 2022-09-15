@@ -9,11 +9,11 @@ import moment from 'moment';
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faBars, faBarsStaggered, faGlobe, faUserSecret, faWeightScale } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBarsStaggered, faEnvelope, faGlobe, faPhoneVolume, faUser, faUserSecret, faWeightScale } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCopyright } from '@fortawesome/free-regular-svg-icons'
 /* add icons to the library */
-library.add(faUserSecret, faBars, faBarsStaggered, faGlobe, faWeightScale, faCopyright, faGithub)
+library.add(faUserSecret, faBars, faBarsStaggered, faGlobe, faWeightScale, faCopyright, faGithub, faPhoneVolume, faEnvelope, faUser)
 
 import './assets/main.css'
 
