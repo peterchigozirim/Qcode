@@ -7,16 +7,8 @@ import QrContent from '../components/QrCodeComponents/QrContent.vue';
 <template>
   <main>
     <!-- <TheWelcome /> -->
-    <div class="max-w-6xl mx-auto w-11/12 min-h-[35rem] flex items-center md:w-auto">
-      <div class="grid md:grid-cols-2 ">
-        <div>
-          <QrContent />
-          <QrCode class="" />
-        </div>
-        <div class="order-first md:order-none">
-          <img src="/image/banner_img.png" alt="">
-        </div>
-      </div>
+    <div class="max-w-6xl mx-auto w-11/12 min-h-[35rem] mt-20 md:mt-0 mb-5 flex md:items-center md:w-auto">
+      <QrCode class="" />
     </div>
 
   </main>

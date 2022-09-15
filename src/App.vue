@@ -2,12 +2,13 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import PageNav from './components/Utility/PageNav.vue'
+import Footer from './components/Utility/Footer.vue';
 
 
 </script>
 
 <template>
-  <div class="bg-emerald-100/90 min-h-screen">
+  <div class="bg-emerald-100/90 min-h-screen select-none">
       <!-- <header>
 
       <div class="wrapper">
@@ -23,6 +24,8 @@ import PageNav from './components/Utility/PageNav.vue'
     </header>
 
     <RouterView />
+
+    <Footer />
   </div>
 </template>
 
