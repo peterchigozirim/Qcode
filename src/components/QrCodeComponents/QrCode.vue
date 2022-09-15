@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="grid md:grid-cols-2 h-full mb-6 gap-8 md:gap-4">
+        <div class="grid md:grid-cols-2 mb-6 gap-8 md:gap-4">
             <div>
                 <div class="space-y-8 w-full">
                     
@@ -33,12 +33,15 @@
                                         <font-awesome :icon="['fas', 'weight-scale']" class="text-white mr-2" />
                                     </div>
                                     <div class="w-full h-full  text-emerald-900">
-                                        <select v-model="qrSize" id="" placeholder="Enter your URL" class="w-full selection:bg-emerald-900 selection:text-emerald-900 h-full bg-white focus:ring-0 focus:outline-none border-0 px-2 placeholder:text-emerald-900 text-emerald-900">
+                                        <select v-model="qrSize" id="" required  class="w-full selection:bg-emerald-900 selection:text-emerald-900 h-full bg-white focus:ring-0 focus:outline-none border-0 px-2 placeholder:text-emerald-900 text-emerald-900">
                                             <option selected disabled value="">Select Size</option>
-                                            <option value="100">100</option>
-                                            <option value="200">200</option>
-                                            <option value="300">300</option>
-                                            <option value="400">400</option>
+                                            <option value="100">100x100</option>
+                                            <option value="200">200x200</option>
+                                            <option value="300">300x300</option>
+                                            <option value="400">400x400</option>
+                                            <option value="500">500x500</option>
+                                            <option value="600">600x600</option>
+                                            <option value="700">700x700</option>
                                         </select>
                                     </div>
                                 </div>
@@ -52,9 +55,9 @@
                     </div>
                 </div>
             </div>
-            <left-image-banner />
+            <left-image-banner class="order-first md:order-none" />
         </div>
-        <div class="w-full space-y-4 py-6" v-show="qrShow">
+        <div class="w-full  space-y-4 py-6" v-show="qrShow">
             <div class="" id="qrSvg">
                 <qrcode-vue :value="value" class="mx-auto " id="qrCode"   :size="size" level="H" />
             </div>
@@ -84,7 +87,7 @@ export default {
         qrSize: '',
         loader: false,
         qrShow:false,
-        linkClass: 'w-96 h-10 mx-auto flex items-center justify-center font-bold bg-emerald-600/90 text-white'
+        linkClass: 'md:w-96 w-full h-10 mx-auto flex items-center justify-center font-bold bg-emerald-600/90 text-white'
     }
     },
     components: {

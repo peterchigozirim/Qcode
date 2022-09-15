@@ -8,9 +8,9 @@
                     </p>
                 </div>
                 <div>
-                    <p>
+                    <a href="https://github.com/peterchigozirim/" target="blank">
                         <font-awesome :icon="['fab', 'github']" class="text-xl" /> github
-                    </p>
+                    </a>
                 </div>
                 <div>
                     <p>

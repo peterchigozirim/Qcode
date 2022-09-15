@@ -1,10 +1,10 @@
 <template>
-  <div class="sticky top-0  text-emerald-800  w-full">
+  <div class="sticky top-0 bg-emerald-100  text-emerald-800  w-full">
     <div class="md:h-16 h-10 py-2 md:p-0 max-w-5xl mx-auto w-11/12 md:w-auto capitalize flex flex-col md:flex-row md:justify-between md:items-center">
         <div class="flex-grow flex transition-all text-xl font-semibold justify-between">
           <div>
             <p>
-              GetUrlQrCode
+              <RouterLink to="/">GetUrlQrCode</RouterLink>
             </p>
           </div>
           <!-- <div @click="openNav = !openNav" class="md:hidden text-white bg-emerald-600 transition-all duration-300 py-1 cursor-pointer px-3 rounded-md">

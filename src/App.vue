@@ -8,7 +8,9 @@ import Footer from './components/Utility/Footer.vue';
 </script>
 
 <template>
-  <div class="bg-emerald-100/90 min-h-screen ">
+  <div class="bg-emerald-100/90 min-h-screen relative">
+    
+    <page-nav />
       <!-- <header>
 
       <div class="wrapper">
@@ -19,9 +21,8 @@ import Footer from './components/Utility/Footer.vue';
         </nav>
       </div>
     </header> -->
-    <header>
-      <page-nav />
-    </header>
+    <!-- <header class="static">
+    </header> -->
 
     <RouterView />
 
