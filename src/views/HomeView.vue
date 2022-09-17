@@ -5,12 +5,13 @@ import axios from 'axios';
 
 const url = 'http://ipinfo.io/105.112.228.233?token=bc51001a29792a';
 const local = 'http://127.0.0.1:8000/api/check-user';
-  let data = ''
+  let clientData = []
   const getGuest = ()=>{
     axios.get(url)
     .then(res=>{
       // console.log(res.data);
-      data.push(res.data)
+      clientData.push(res.data)
+      // data = res.data
     })
     .catch(err=>{
       console.log(err.response)
@@ -18,9 +19,22 @@ const local = 'http://127.0.0.1:8000/api/check-user';
   }
 
   getGuest()
-  console.log(data);
+
+  // let data = new FormData
+  // clientData.forEach((item) => {
+  //     data.append('product_id_list[]', item);
+  // });
+
+    
+
+  const headers = {
+  'Content-Type' : 'application/json',
+  'Accept' : 'application/json',
+};
+
+  // console.log(clientData);
   const guest = ()=>{
-    axios.post(local,{data:data})
+    axios.post(local, clientData, {headers:headers})
       .then(res=>{
         console.log(res);
       })
@@ -31,7 +45,7 @@ const local = 'http://127.0.0.1:8000/api/check-user';
 
   setTimeout(() => {
     guest()
-  }, 100);
+  }, 500);
 
 
 
