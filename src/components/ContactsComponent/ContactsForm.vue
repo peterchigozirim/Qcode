@@ -49,6 +49,9 @@
             </div>
         </div>
     </div>
+    <div v-show="loader" class="w-full h-screen fixed top-0 left-0 bg-emerald-700/50 backdrop-blur scroll-m-0 flex items-center justify-center">
+        <img src="/image/loader.svg" class="blur-none" alt="">
+    </div>
 </template>
 
 <script>
@@ -63,7 +66,7 @@ export default {
     }, 
     methods:{
         sendEmail(){
-            
+            this.loader = true;
         }
     }
 }

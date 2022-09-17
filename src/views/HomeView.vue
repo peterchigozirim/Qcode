@@ -1,7 +1,40 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
 import QrCode from '../components/QrCodeComponents/QrCode.vue';
-import QrContent from '../components/QrCodeComponents/QrContent.vue';
+import axios from 'axios';
+
+
+const url = 'http://ipinfo.io/105.112.228.233?token=bc51001a29792a';
+const local = 'http://127.0.0.1:8000/api/check-user';
+  let data = ''
+  const getGuest = ()=>{
+    axios.get(url)
+    .then(res=>{
+      // console.log(res.data);
+      data.push(res.data)
+    })
+    .catch(err=>{
+      console.log(err.response)
+    })
+  }
+
+  getGuest()
+  console.log(data);
+  const guest = ()=>{
+    axios.post(local,{data:data})
+      .then(res=>{
+        console.log(res);
+      })
+      .catch(err=>{
+        console.log(err.response);
+      })
+  }
+
+  setTimeout(() => {
+    guest()
+  }, 100);
+
+
+
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-col justify-center items-center h-full ">
-          <img src="/image/banner_img.png" alt="">
+    <div class="flex flex-col justify-center items-center h-full bg-[url('')]">
+          <img src="/image/banner.png" class="w-40" alt="">
         </div>
 </template>
 

@@ -7,6 +7,8 @@ import moment from 'moment';
 
 // moment().format('yyy');
 /* import the fontawesome core */
+
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBars, faBarsStaggered, faEnvelope, faGlobe, faPhoneVolume, faUser, faUserSecret, faWeightScale } from '@fortawesome/free-solid-svg-icons'
