@@ -5,13 +5,11 @@ import axios from 'axios';
 
 const url = 'http://ipinfo.io/105.112.228.233?token=bc51001a29792a';
 const local = 'http://127.0.0.1:8000/api/check-user';
-  let clientData = []
+  let clientData = ''
   const getGuest = ()=>{
     axios.get(url)
     .then(res=>{
-      // console.log(res.data);
-      clientData.push(res.data)
-      // data = res.data
+      clientData = res.data
     })
     .catch(err=>{
       console.log(err.response)
@@ -19,31 +17,28 @@ const local = 'http://127.0.0.1:8000/api/check-user';
   }
 
   getGuest()
-
-  // let data = new FormData
-  // clientData.forEach((item) => {
-  //     data.append('product_id_list[]', item);
-  // });
-
-    
+  let agent = navigator.userAgent;
+  let host = window.location.host
+  let os = navigator.platform
 
   const headers = {
-  'Content-Type' : 'application/json',
-  'Accept' : 'application/json',
-};
-
-  // console.log(clientData);
-  const guest = ()=>{
-    axios.post(local, clientData, {headers:headers})
-      .then(res=>{
-        console.log(res);
-      })
-      .catch(err=>{
-        console.log(err.response);
-      })
-  }
+    'Content-Type' : 'application/json',
+    'Accept' : 'application/json',
+  };
 
   setTimeout(() => {
+    Object.assign(clientData, {'device': agent}, {'host': host}, {'os': os},)
+    
+    
+    const guest = ()=>{
+      axios.post(local, clientData, {headers:headers})
+        .then(res=>{
+          console.log(res);
+        })
+        .catch(err=>{
+          console.log(err.response);
+        })
+    }
     guest()
   }, 500);
 

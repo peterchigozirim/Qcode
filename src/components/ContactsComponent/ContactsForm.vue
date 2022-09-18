@@ -5,7 +5,7 @@
         </div>
         <div class="w-full rounded-md shadow-md drop-shadow-xl shadow-emerald-600/20 bg-emerald-50">
             <div class="w-11/12 mx-auto pt-6 pb-4">
-                <form @submit.prevent="sendEmail">
+                <form @submit.prevent="submit()">
                     <div class="space-y-4">
                         <div>
                             <label for="name" class="text-lg capitalize mb-1 text-emerald-600 font-semibold">full name</label>
@@ -14,7 +14,7 @@
                                     <font-awesome :icon="['fas', 'user']" />
                                 </div>
                                 <div class="h-full w-full">
-                                    <input type="text" placeholder="enter full name" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
+                                    <input type="text" v-model="form.fullname" placeholder="enter full name" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
                                 </div>
                             </div>
                         </div>
@@ -25,7 +25,7 @@
                                     <font-awesome :icon="['fas', 'envelope']" />
                                 </div>
                                 <div class="h-full w-full">
-                                    <input type="email" placeholder="enter email address" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
+                                    <input type="email" v-model="form.email" placeholder="enter email address" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                             <label for="message" class="text-lg capitalize mb-2 text-emerald-600 font-semibold">message</label>
                             <div class="w-full  rounded-md shadow-inner bg-white/90">
                                 <div class="h-full w-full">
-                                    <textarea name="" id=""  class="w-full focus:border rounded-md p-2 focus:border-emerald-600 focus:outline-none focus:ring-0" rows="5"></textarea>
+                                    <textarea v-model="form.message" id=""  class="w-full focus:border rounded-md p-2 focus:border-emerald-600 focus:outline-none focus:ring-0" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -54,22 +54,59 @@
     </div>
 </template>
 
-<script>
-export default {
-    data(){
-        return{
-            fullname:'',
-            email: '',
-            message: '',
-            loader:false,
-        }
-    }, 
-    methods:{
-        sendEmail(){
-            this.loader = true;
-        }
+<script setup>
+import axios from "axios"
+
+    const url = 'http://ipinfo.io/105.112.228.233?token=bc51001a29792a';
+    const local = 'http://127.0.0.1:8000/api/add-contact'
+    const form = {
+        'email' : '',
+        'fullname' : '',
+        'message' : '',
+        'device' : navigator.userAgent,
+        'os' : navigator.platform
     }
-}
+    
+ 
+    let clientData = ''
+
+    const getGuest = ()=>{
+        axios.get(url)
+        .then(res=>{
+        clientData = res.data
+        })
+        .catch(err=>{
+        console.log(err.response)
+        })
+    }
+    getGuest()
+
+    const submit = ()=>{
+        Object.assign(form, clientData)
+
+        axios.post(local, form)
+        .then(res=>{
+            console.log(res);
+        })
+        .catch(err=>{
+            console.log(err.response)
+        })
+    }
+// export default {
+//     data(){
+//         return{
+//             fullname:'',
+//             email: '',
+//             message: '',
+//             loader:false,
+//         }
+//     }, 
+//     methods:{
+//         sendEmail(){
+//             this.loader = true;
+//         },
+//     }
+// }
 </script>
 
 <style>

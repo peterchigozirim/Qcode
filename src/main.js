@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import device from "vue-device-detector"
 import moment from 'moment';
 
 // moment().format('yyy');
@@ -23,6 +24,7 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+// app.use(device)
 app.component('font-awesome', FontAwesomeIcon)
 // app.use('moment', moment)
 app.mount('#app')
