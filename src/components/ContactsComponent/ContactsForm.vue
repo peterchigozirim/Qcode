@@ -14,7 +14,7 @@
                                     <font-awesome :icon="['fas', 'user']" />
                                 </div>
                                 <div class="h-full w-full">
-                                    <input type="text" v-model="form.fullname" placeholder="enter full name" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
+                                    <input type="text" :value="form.fullname" placeholder="enter full name" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
                                 </div>
                             </div>
                         </div>
@@ -25,7 +25,7 @@
                                     <font-awesome :icon="['fas', 'envelope']" />
                                 </div>
                                 <div class="h-full w-full">
-                                    <input type="email" v-model="form.email" placeholder="enter email address" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
+                                    <input type="email" :value="form.email" placeholder="enter email address" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                             <label for="message" class="text-lg capitalize mb-2 text-emerald-600 font-semibold">message</label>
                             <div class="w-full  rounded-md shadow-inner bg-white/90">
                                 <div class="h-full w-full">
-                                    <textarea v-model="form.message" id=""  class="w-full focus:border rounded-md p-2 focus:border-emerald-600 focus:outline-none focus:ring-0" rows="5"></textarea>
+                                    <textarea :value="form.message" id=""  class="w-full focus:border rounded-md p-2 focus:border-emerald-600 focus:outline-none focus:ring-0" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,10 @@
 
 <script setup>
 import axios from "axios"
+import { useToast } from "vue-toastification";
+import { ref, computed } from 'vue'
 
+    const toast = useToast();
     const url = 'http://ipinfo.io/105.112.228.233?token=bc51001a29792a';
     const local = 'http://127.0.0.1:8000/api/add-contact'
     const form = {
@@ -66,8 +69,7 @@ import axios from "axios"
         'device' : navigator.userAgent,
         'os' : navigator.platform
     }
-    
- 
+
     let clientData = ''
 
     const getGuest = ()=>{
@@ -81,32 +83,30 @@ import axios from "axios"
     }
     getGuest()
 
+    const clearForm = ()=>{
+        
+    }
+
     const submit = ()=>{
         Object.assign(form, clientData)
 
         axios.post(local, form)
         .then(res=>{
-            console.log(res);
+            if(res.data.status == 'success'){
+                toast(res.data.message);
+                form.email = '';
+                form.fullname = '';
+                form.message = '';
+            }
         })
         .catch(err=>{
             console.log(err.response)
+            if(err.response){
+                toast.error(err.response.data.message)
+            }
         })
     }
-// export default {
-//     data(){
-//         return{
-//             fullname:'',
-//             email: '',
-//             message: '',
-//             loader:false,
-//         }
-//     }, 
-//     methods:{
-//         sendEmail(){
-//             this.loader = true;
-//         },
-//     }
-// }
+
 </script>
 
 <style>

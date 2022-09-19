@@ -6,6 +6,11 @@ import router from './router'
 import device from "vue-device-detector"
 import moment from 'moment';
 
+// vue toastification 
+import Toast from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+
 // moment().format('yyy');
 /* import the fontawesome core */
 
@@ -24,7 +29,7 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-// app.use(device)
+app.use(Toast)
 app.component('font-awesome', FontAwesomeIcon)
 // app.use('moment', moment)
 app.mount('#app')
