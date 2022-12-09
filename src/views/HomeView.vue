@@ -3,44 +3,32 @@ import QrCode from '../components/QrCodeComponents/QrCode.vue';
 import axios from 'axios';
 
 
-const url = 'http://ipinfo.io/105.112.228.233?token=bc51001a29792a';
-const local = 'http://127.0.0.1:8000/api/check-user';
-  let clientData = ''
-  const getGuest = ()=>{
-    axios.get(url)
-    .then(res=>{
-      clientData = res.data
-    })
-    .catch(err=>{
-      console.log(err.response)
-    })
-  }
+// const local = 'http://127.0.0.1:8000/api/check-user';
+  
 
-  getGuest()
-  let agent = navigator.userAgent;
-  let host = window.location.host
-  let os = navigator.platform
+//   let agent = navigator.userAgent;
+//   let host = window.location.host
+//   let os = navigator.platform
 
-  const headers = {
-    'Content-Type' : 'application/json',
-    'Accept' : 'application/json',
-  };
+//   const headers = {
+//     'Content-Type' : 'application/json',
+//     'Accept' : 'application/json',
+//   };
 
-  setTimeout(() => {
-    Object.assign(clientData, {'device': agent}, {'host': host}, {'os': os},)
+//   setTimeout(() => {
+//     Object.assign(clientData, {'device': agent}, {'host': host}, {'os': os},)
     
     
-    const guest = ()=>{
-      axios.post(local, clientData, {headers:headers})
-        .then(res=>{
-          console.log(res);
-        })
-        .catch(err=>{
-          console.log(err.response);
-        })
-    }
-    guest()
-  }, 500);
+//     const guest = ()=>{
+//       axios.post( clientData, {headers:headers})
+//         .then(res=>{
+//           console.log(res);
+//         })
+//         .catch(err=>{
+//           console.log(err.response);
+//         })
+//     }
+//   }, 500);
 
 
 

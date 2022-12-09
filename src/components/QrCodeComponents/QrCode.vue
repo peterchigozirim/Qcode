@@ -4,7 +4,7 @@
             <div>
                 <div class="space-y-8 w-full">
                     
-                    <div class="md:w-96 mx-auto">
+                    <div class="mx-auto">
                         <qr-content />
                         <form @submit.prevent="genQrCode()">
                             <div class=" mb-6">
@@ -21,7 +21,7 @@
                                     <p>
                                         example
                                         <span class=" text-emerald-700 text-center font-bold italic">
-                                            ( https://gorgor.com )
+                                            (https://qrcode.tastepage.online)
                                         </span>
                                     </p>
                                     
@@ -72,67 +72,57 @@
     </div>
     
 </template>
-<script>
+<script setup>
 import QrcodeVue from 'qrcode.vue'
 import QrContent from './QrContent.vue'
 import LeftImageBanner from './LeftImageBanner.vue'
+import { ref } from 'vue';
 
-export default {
-    data() {
-    return {
-        value: '',
-        size: 200,
-        loader: false,
-        url:'',
-        qrSize: '',
-        loader: false,
-        qrShow:false,
-        linkClass: 'md:w-96 w-full h-10 mx-auto flex items-center justify-center font-bold bg-emerald-600/90 text-white'
-    }
-    },
-    components: {
-    QrcodeVue,
-    QrContent,
-    LeftImageBanner
-},
-    methods:{
-        genQrCode(){
-            this.removeUrl()
-            this.loader = true
+
+    const value = ref('')
+    const size = ref(200)
+    const loader = ref(false)
+    const url = ref('')
+    const qrSize = ref('')
+    const qrShow = ref(false)
+    const linkClass = ref('md:w-96 w-full h-10 mx-auto flex items-center justify-center font-bold bg-emerald-600/90 text-white') 
+
+
+    const genQrCode = () =>{
+            removeUrl()
+            loader.value = true
             setTimeout(() => {
-                this.loader = false
-                this.qrShow = true
+                loader.value = false
+                qrShow.value = true
             }, 1000);
-            this.value = this.url
-            this.size = this.qrSize
+            value.value = url.value
+            size.value = qrSize.value
 
             setTimeout(() => {
                 const qrSvg = document.getElementById('qrSvg');
                 const getUrl = qrSvg.querySelector('canvas');
                 
                 var img  = getUrl.toDataURL("image/png");
-                this.getSvg(img)
+                getSvg(img)
             }, 50);
 
 
-        },
+        }
 
-        getSvg(url){
+        const getSvg = (url) =>{
             const link = document.createElement('a');
             link.id = 'save-link';
-            link.classList = this.linkClass;
+            link.classList = linkClass.value;
             link.href = url;
             link.download = 'qrcode';
             link.innerHTML = 'Save Image';
             document.getElementById('qrLink').appendChild(link)
-        },
+        }
 
-        removeUrl(){
+        const removeUrl = ()=>{
             const url = document.getElementById('save-link')
             if (url) {
                 url.remove();
             }
         }
-    },
-}
 </script>

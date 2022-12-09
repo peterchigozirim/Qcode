@@ -1,7 +1,7 @@
 <template>
-    <footer class=" bg-emerald-100">
-        <div class="max-w-6xl h-12 mx-auto w-11/12 md:w-auto">
-            <div class="flex gap-8 h-full justify-center items-center capitalize">
+    <footer class="sticky buttom-0">
+        <div class="max-w-6xl md:h-12 h-3 mx-auto  w-11/12 md:w-auto">
+            <div class="flex gap-8 h-full text-xs md:text-base justify-center items-center capitalize">
                 <div>
                     <RouterLink to="/contact-us">contact us</RouterLink>
                 </div>

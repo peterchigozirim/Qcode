@@ -60,7 +60,7 @@ import { useToast } from "vue-toastification";
 import { ref, computed } from 'vue'
 
     const toast = useToast();
-    const url = 'http://ipinfo.io/105.112.228.233?token=bc51001a29792a';
+    const url = ;
     const local = 'http://127.0.0.1:8000/api/add-contact'
     const form = {
         'email' : '',
