@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, markRaw } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
@@ -7,7 +7,7 @@ import device from "vue-device-detector"
 import moment from 'moment';
 
 // vue toastification 
-import Toast from "vue-toastification";
+import Toast, { useToast } from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
 
@@ -26,8 +26,14 @@ library.add(faUserSecret, faBars, faBarsStaggered, faGlobe, faWeightScale, faCop
 import './assets/main.css'
 
 const app = createApp(App)
+const pinia = createPinia();
 
-app.use(createPinia())
+pinia.use(({ store }) => {
+    store.router = markRaw(router)
+})
+
+
+app.use(pinia)
 app.use(router)
 app.use(Toast)
 app.component('font-awesome', FontAwesomeIcon)

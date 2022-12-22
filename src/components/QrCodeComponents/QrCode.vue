@@ -77,7 +77,10 @@ import QrcodeVue from 'qrcode.vue'
 import QrContent from './QrContent.vue'
 import LeftImageBanner from './LeftImageBanner.vue'
 import { ref } from 'vue';
+import { infoStore } from '@/stores/infoStore'
 
+
+    const store = infoStore()
 
     const value = ref('')
     const size = ref(200)
@@ -106,7 +109,7 @@ import { ref } from 'vue';
                 getSvg(img)
             }, 50);
 
-
+            countDownload()
         }
 
         const getSvg = (url) =>{
@@ -117,6 +120,11 @@ import { ref } from 'vue';
             link.download = 'qrcode';
             link.innerHTML = 'Save Image';
             document.getElementById('qrLink').appendChild(link)
+        }
+
+
+        const countDownload = () =>{
+            store.getDownload()
         }
 
         const removeUrl = ()=>{

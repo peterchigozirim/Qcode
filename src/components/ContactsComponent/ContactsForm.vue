@@ -14,7 +14,7 @@
                                     <font-awesome :icon="['fas', 'user']" />
                                 </div>
                                 <div class="h-full w-full">
-                                    <input type="text" :value="form.fullname" placeholder="enter full name" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
+                                    <input type="text" v-model="form.fullname" placeholder="enter full name" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
                                 </div>
                             </div>
                         </div>
@@ -25,7 +25,7 @@
                                     <font-awesome :icon="['fas', 'envelope']" />
                                 </div>
                                 <div class="h-full w-full">
-                                    <input type="email" :value="form.email" placeholder="enter email address" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
+                                    <input type="email" v-model="form.email" placeholder="enter email address" class="h-full w-full focus:border-none focus:ring-0 focus:outline-none px-2 text-emerald-600/90 placeholder:text-emerald-600/90 placeholder:capitalize bg-transparent">
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                             <label for="message" class="text-lg capitalize mb-2 text-emerald-600 font-semibold">message</label>
                             <div class="w-full  rounded-md shadow-inner bg-white/90">
                                 <div class="h-full w-full">
-                                    <textarea :value="form.message" id=""  class="w-full focus:border rounded-md p-2 focus:border-emerald-600 focus:outline-none focus:ring-0" rows="5"></textarea>
+                                    <textarea v-model="form.message" id=""  class="w-full focus:border rounded-md p-2 focus:border-emerald-600 focus:outline-none focus:ring-0" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -60,50 +60,32 @@ import { useToast } from "vue-toastification";
 import { ref, computed } from 'vue'
 
     const toast = useToast();
-    const url = ;
-    const local = 'http://127.0.0.1:8000/api/add-contact'
-    const form = {
-        'email' : '',
-        'fullname' : '',
-        'message' : '',
-        'device' : navigator.userAgent,
-        'os' : navigator.platform
-    }
+    const loader = ref(false)
+    const form = ref({
+        email : '',
+        fullname : '',
+        message : '',
+    })
 
-    let clientData = ''
-
-    const getGuest = ()=>{
-        axios.get(url)
-        .then(res=>{
-        clientData = res.data
-        })
-        .catch(err=>{
-        console.log(err.response)
-        })
-    }
-    getGuest()
-
-    const clearForm = ()=>{
-        
-    }
 
     const submit = ()=>{
-        Object.assign(form, clientData)
+        const url = 'http://127.0.0.1:8000/api/';
+        loader.value = true
 
-        axios.post(local, form)
+        axios.post(url+ 'contact-us', form.value)
         .then(res=>{
             if(res.data.status == 'success'){
                 toast(res.data.message);
-                form.email = '';
-                form.fullname = '';
-                form.message = '';
+                form.value.email = '';
+                form.value.fullname = '';
+                form.value.message = '';
+                loader.value = false
             }
         })
         .catch(err=>{
-            console.log(err.response)
-            if(err.response){
-                toast.error(err.response.data.message)
-            }
+            console.log(err)
+            loader.value = false
+            toast.error(err.response.data.message)
         })
     }
 
