@@ -24,6 +24,7 @@ import { faCopyright } from '@fortawesome/free-regular-svg-icons'
 library.add(faUserSecret, faBars, faBarsStaggered, faGlobe, faWeightScale, faCopyright, faGithub, faPhoneVolume, faEnvelope, faUser)
 
 import './assets/main.css'
+import '@/axios'
 
 const app = createApp(App)
 const pinia = createPinia();
