@@ -65,28 +65,12 @@ import { ref, computed } from 'vue'
         email : '',
         fullname : '',
         message : '',
+        os : navigator.userAgent
     })
 
 
     const submit = ()=>{
-        const url = 'http://127.0.0.1:8000/api/';
-        loader.value = true
-
-        axios.post(url+ 'contact-us', form.value)
-        .then(res=>{
-            if(res.data.status == 'success'){
-                toast(res.data.message);
-                form.value.email = '';
-                form.value.fullname = '';
-                form.value.message = '';
-                loader.value = false
-            }
-        })
-        .catch(err=>{
-            console.log(err)
-            loader.value = false
-            toast.error(err.response.data.message)
-        })
+        console.log(form.value)
     }
 
 </script>

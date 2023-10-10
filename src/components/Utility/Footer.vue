@@ -1,7 +1,7 @@
 <template>
-    <footer class="sticky buttom-0">
-        <div class="max-w-6xl md:h-12 h-3 mx-auto  w-11/12 md:w-auto">
-            <div class="flex gap-8 h-full text-xs md:text-base justify-center items-center capitalize">
+    <footer class="sticky bottom-0 bg-emerald-100/90">
+        <div class="max-w-6xl pb-3 h-3 mx-auto  w-11/12 md:w-auto">
+            <div class="flex gap-8 h-full text-xs md:text-base justify-center items-end capitalize">
                 <div>
                     <RouterLink to="/contact-us">contact us</RouterLink>
                 </div>
@@ -11,8 +11,8 @@
                     </a>
                 </div>
                 <div>
-                    <p>
-                        <font-awesome :icon="['far', 'copyright']" class="text-lg" /> 2022 copyright
+                    <p class="flex items-center gap-1">
+                        <font-awesome :icon="['far', 'copyright']" class="text-lg" /> {{ new Date().getFullYear() }} copyright <a href="https://gorgorcity.com" class="text-green-600 hover:text-black">Gorgorcity</a>
                     </p>
                 </div>
             </div>
@@ -21,15 +21,7 @@
 </template>
 
 <script>
-    // var moment = require('moment')
-    export default {
-        data(){
-            return{
-                // moment:moment,
-            }
-        },
-     
-    }
+ 
 </script>
 
 <style>

@@ -1,5 +1,5 @@
 <script setup>
-import QrCode from '../components/QrCodeComponents/QrCode.vue';
+import QrCode from '@/components/QrCodeComponents/QrCode.vue';
 import Modal from '@/components/Utility/Modal.vue'
 import { infoStore } from '@/stores/infoStore'
 import { onMounted } from 'vue';

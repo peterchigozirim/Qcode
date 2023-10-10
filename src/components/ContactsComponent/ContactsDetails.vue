@@ -16,7 +16,7 @@
                         <p>call us</p>
                     </div>
                     <div>
-                        <a href="tel:+2348109726010" class="hover:text-emerald-600 group-hover:hover:text-emerald-50 hover:underline">phone:+2348109726010</a>
+                        <a href="tel:+2349013359038" class="hover:text-emerald-600 group-hover:hover:text-emerald-50 hover:underline">phone:+2349013359038</a>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                         <p>email</p>
                     </div>
                     <div>
-                        <a href="mailto:peterchigozirim@gmail.com" class="hover:text-emerald-600 group-hover:hover:text-emerald-50 hover:underline">contact@peterchigozirim.com</a>
+                        <a href="mailto:info@gorgorcity.com" class="hover:text-emerald-600 group-hover:hover:text-emerald-50 lowercase hover:underline">info@gorgorcity.com</a>
                     </div>
                 </div>
             </div>
