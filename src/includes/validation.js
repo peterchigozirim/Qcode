@@ -1,5 +1,5 @@
 import { Form as VeeForm, Field as VeeField, defineRule, ErrorMessage, configure  } from 'vee-validate';
-import { required, min, max, alpha_spaces as alphaSpaces, confirmed, numeric, image } from '@vee-validate/rules'
+import { required, min, max, alpha_spaces as alphaSpaces, confirmed, numeric, image, email } from '@vee-validate/rules'
 
 export default {
     install(app){
@@ -9,6 +9,7 @@ export default {
 
         defineRule('required', required)
         defineRule('tos', required)
+        defineRule('email', email)
         defineRule('min', min)
         defineRule('max', max)
         defineRule('alpha_spaces', alphaSpaces)
@@ -20,6 +21,7 @@ export default {
             generateMessage: (cxt) =>{
                 const messages = {
                     required: `The field is required.`,
+                    email: `The field must be an email address.`,
                     min: `The field ${cxt.field} is too short.`,
                     max: `The field ${cxt.field} is too long.`,
                     alpha_spaces: `The field ${cxt.field} may only contain alphabetical characters and space.`,

@@ -4,6 +4,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import device from "vue-device-detector"
+import VeeValidationPlugin from '@/includes/validation'
 import moment from 'moment';
 
 // vue toastification 
@@ -11,8 +12,6 @@ import Toast, { useToast } from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
 
-// moment().format('yyy');
-/* import the fontawesome core */
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -35,6 +34,7 @@ pinia.use(({ store }) => {
 
 
 app.use(pinia)
+app.use(VeeValidationPlugin)
 app.use(router)
 app.use(Toast)
 app.component('font-awesome', FontAwesomeIcon)
